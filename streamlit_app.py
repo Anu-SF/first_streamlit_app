@@ -29,7 +29,7 @@ try:
     streamlit.dataframe(back_from_function)
 except URLError as e:
     streamlit.error()
-import request
+import requests
 fruit_choice1 = streamlit.text_input('What would you like to add?','jackfruit')
 streamlit.write('The user entered ', fruit_choice1)
 fruityvice_response1 = requests.get("https://fruityvice.com/api/fruit/" +fruit_choice1)
