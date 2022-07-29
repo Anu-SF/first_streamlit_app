@@ -27,8 +27,8 @@ try:
   else:
     back_from_function=get_fruityvice_data(fruit_choice)
     streamlit.dataframe(back_from_function)
-except urllib2.URLError as e:
-    streamlit.error()
+#except urllib2.URLError as e:
+ #   streamlit.error()
 import requests
 fruit_choice1 = streamlit.text_input('What would you like to add?','jackfruit')
 streamlit.write('The user entered ', fruit_choice1)
