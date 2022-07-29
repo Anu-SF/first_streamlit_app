@@ -42,15 +42,13 @@ fruityvice_normalized1 = pandas.json_normalize(fruityvice_response1.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized1)
 
-streamlit.stop()
-import snowflake.connector
-insecure_mode=True
-client_session_keep_alive=True
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_data_row = my_cur.fetchone()
-streamlit.text("Hello from Snowflake:")
-streamlit.text("Hello from SnowflakeUser:")
-streamlit.text(my_data_row)
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute("SELECT * from fruit_Load_list")
+        return my_cur.fetchall()
+#Add button
+if streamlit.button('Get FruitLoadList'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = my_cur.fetchall()
+    streamlit.text(my_data_rows)
 
